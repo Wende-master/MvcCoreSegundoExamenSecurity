@@ -20,7 +20,7 @@ namespace MvcCoreSegundoExamenSecurity.Models
         [Column("Resumen")]
         public string Resumen { get; set; }
         [Column("Precio")]
-        public int precio { get; set; }
+        public int Precio { get; set; }
         [Column("IdGenero")]
         public int IdGenero { get; set; }
 

@@ -1,0 +1,50 @@
+﻿@model  List<Libro>
+
+@{
+    int idUsuario = int.Parse(Context.User.FindFirst("IdUsuario").Value);
+}
+
+@if (Model != null)
+{
+    <a asp-controller="Libros" asp-action="FinalizarCompra"
+    class="btn btn-outline-success" asp-route-idUsuario="@idUsuario">
+        Finalizar compra
+    </a>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Autor</th>
+                <th>Portada</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Libro lib in Model)
+            {
+                <tr>
+                    <td>@lib.Titulo</td>
+                    <td>@lib.Autor</td>
+                    <td>
+                        <img src="~/images/@lib.Portada"
+                             style="width:100px; height:150px;" />
+                    </td>
+                    <td>@lib.Precio</td>
+                    <td>
+                        <a asp-controller="Libros"
+                        asp-action="Carrito"
+                        asp-route-ideliminar="@lib.IdLibro"
+                            class="btn btn-danger">
+                            Quitar del carrito
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1>@ViewData["MENSAJE"]</h1>
+}

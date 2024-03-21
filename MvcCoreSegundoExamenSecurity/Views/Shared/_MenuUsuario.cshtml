@@ -11,16 +11,46 @@ else
     <li class="nav-item">
         <a class="nav-link" asp-controller="Usuarios" asp-action="PerfilUsuario">
             <img src="~/images/@Context.User.FindFirstValue("Foto")" width="25" height="25" />
-        </a>
-    </li>
-    
-
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Managed" asp-action="Logout">
-            Log Out
-            <span class="text-danger">
+            <span class="text-secondary">
                 @Context.User.FindFirstValue("Nombre")
             </span>
         </a>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Managed" asp-action="Logout">
+            <span class="text-danger">
+                @Context.User.FindFirstValue("Nombre")
+            </span>
+            Cerrar Sesión
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a asp-controller="Libros"
+           asp-action="Carrito"
+           class="nav-link">
+            Carrito
+        </a>
+    </li>
+    <li class="nav-item">
+        <a asp-controller="Libros"
+           asp-action="PedidosUsuario"
+           class="nav-link">
+            Mis pedidos
+        </a>
+    </li>
+
+    <li class="nav-link">
+        @{
+            List<int> ids = Context.Session.GetObject<List<int>>("CARRITO");
+        }
+        Libros:
+        @if (ids != null)
+        {
+            @ids.Count
+        }
+
     </li>
 }

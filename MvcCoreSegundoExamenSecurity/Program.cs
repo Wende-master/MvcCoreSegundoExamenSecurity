@@ -5,8 +5,10 @@ using MvcCoreSegundoExamenSecurity.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession();
+string connectionString = builder.Configuration.GetConnectionString("SqlHospital");
+builder.Services.AddTransient<RepositoryExamen>();
+builder.Services.AddDbContext<LibrosContext>(
+    options => options.UseSqlServer(connectionString));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -23,12 +25,8 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllersWithViews(options => options.EnableEndpointRouting = false)
     .AddSessionStateTempDataProvider();
 
-string connectionString = builder.Configuration.GetConnectionString("SqlHospital");
-builder.Services.AddTransient<RepositoryExamen>();
-builder.Services.AddDbContext<LibrosContext>(
-    options => options.UseSqlServer(connectionString));
-
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 builder.Services.AddAuthorization();
 
@@ -46,11 +44,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseSession();
 
 app.UseMvc(routes =>
 {
