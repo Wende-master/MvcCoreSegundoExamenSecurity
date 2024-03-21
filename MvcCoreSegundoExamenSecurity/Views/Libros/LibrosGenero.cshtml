@@ -1,0 +1,76 @@
+﻿@model List<Libro>
+
+@{
+    ViewData["Title"] = "Libros";
+}
+
+<h1>LibrosGenero</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Titulo
+            </th>
+            <th>
+                Autor
+            </th>
+            <th>
+                Editorial
+            </th>
+            <th>
+                Portada
+            </th>
+            <th>
+                Resumen
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                IdGenero
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdLibro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Autor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Editorial)
+                </td>
+                <td>
+                    <img src="~/images/@Html.DisplayFor(modelItem => item.Portada)" width="200" height="200" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resumen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdGenero)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

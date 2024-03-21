@@ -1,0 +1,21 @@
+﻿
+
+<h3 class="text-primary">
+    Bienvenido @Context.User.FindFirstValue("Nombre")
+</h3>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        Nombre:  @Context.User.FindFirstValue("Nombre")
+    </li>
+    <li class="list-group-item">
+        Apellido:  @Context.User.FindFirstValue("Apellidos")
+    </li>
+    <li class="list-group-item">
+        Email: @Context.User.Identity.Name
+    </li>
+
+    <li class="list-group-item">
+        <img src="~/images/@Context.User.FindFirstValue("Foto")" width="200" height="200" />
+    </li>
+</ul>
